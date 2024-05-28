@@ -20,14 +20,16 @@ function setup() {
 
     // 글자별 포인트 만들어주기
     let charPoints = font.textToPoints(char, offsetX, offsetY, 192, {
-      sampleFactor: 0.4,
+      sampleFactor: 0.8,
       simplifyThreshold: 0,
     });
 
     // 각 포인트에 대한 Mover 객체 생성하고 movers에 저장해주기
     for (let p of charPoints) {
       let m = random(0.5, 4);
-      tempMoversArr.push(new Mover(m, p.x, p.y));
+      let px = p.x + random(-3, 3);
+      let py = p.y + random(-3, 3);
+      tempMoversArr.push(new Mover(m, px, py));
     }
     movers.push(tempMoversArr);
 
@@ -62,8 +64,9 @@ function draw() {
     } else {
       stroke(255);
     }
-
-    noFill();
+    movers[i] = moversArray.filter((mover) => mover.isActive);
+    console.log(movers);
+    // noFill();
     // rect(boundary.x, boundary.y, boundary.w, boundary.h);
   }
 
