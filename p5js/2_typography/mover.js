@@ -7,8 +7,8 @@ class Mover {
     this.hasInitialVelocity = false;
     this.isActive = true;
 
-    this.createTime = millis(); // 객체 생성 시간 기록
-    this.minCheckTime = 500; // 최소 체크 시간 (밀리초)
+    this.alpha = 255;
+    this.angle = 0;
   }
 
   applyForce(force) {
@@ -31,20 +31,25 @@ class Mover {
       this.velocity.add(this.acceleration);
       this.position.add(this.velocity);
       this.acceleration.mult(0);
-      // 시간 체크 후 속도가 임계값 이하인지 확인
-      if (millis() - this.createTime > this.minCheckTime) {
-        print("들어옴");
-        this.checkVelocity();
+      // this.checkVelocity();
+
+      if (this.hasInitialVelocity && this.alpha > 0) {
+        this.alpha -= random(1, 8); // 투명도를 점진적으로 감소
       }
+
+      this.angle += 10;
     }
   }
 
-  checkVelocity() {
-    if (this.velocity.mag() < 0.01 && this.hasInitialVelocity) {
-      // 속도가 0.1 이하인 경우
-      this.isActive = false; // 객체를 비활성화
-    }
-  }
+  // checkVelocity() {
+  //   if (
+  //     (this.velocity.mag() < 0.01 && this.hasInitialVelocity) ||
+  //     millis() - this.createTime > 3000
+  //   ) {
+  //     // 속도가 0.1 이하인 경우
+  //     this.isActive = false; // 객체를 비활성화
+  //   }
+  // }
 
   applyFriction() {
     let frictionCoefficient = 1; // 마찰 계수
@@ -60,14 +65,21 @@ class Mover {
     this.applyForce(friction);
   }
 
-  display() {
+  display(index) {
+    // print(index);
     noStroke();
     let colorHue = map(this.mass, 0.5, 4, 0, 230);
 
     colorMode(HSB, 255);
-    fill(colorHue, 150, 230);
+    fill(colorHue, 150, 230, this.alpha);
 
-    ellipse(this.position.x, this.position.y, 2, 2);
+    ellipse(
+      this.position.x + sin(this.angle + index) * 1.5,
+      this.position.y + sin(this.angle + index * 2),
+      2,
+      2
+    );
+    // ellipse(this.position.x, this.position.y, 2, 2);
   }
 
   checkEdges() {
@@ -86,9 +98,10 @@ class Mover {
       this.position.x > width ||
       this.position.x < 0 ||
       this.position.y > height ||
-      this.position.y < 0
+      this.position.y < 0 ||
+      this.alpha <= 0
     ) {
-      this.isActive = false; // 화면 밖으로 나가면 비활성화
+      this.isActive = false; // 화면 밖으로 나가거나 alpha 값이 0 이하가 되면 비활성화
     }
   }
 }
