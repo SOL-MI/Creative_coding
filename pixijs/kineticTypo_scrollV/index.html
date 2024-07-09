@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=0"
+    />
+    <title>Document</title>
+    <link rel="stylesheet" type="text/html" href="style.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/pixi.js@7.x/dist/pixi.min.js"></script>
+    <style>
+      #user-input {
+        position: absolute;
+        right: 50%;
+        left: 50%;
+        top: 20px;
+        width: 30vw;
+        height: 20px;
+        transform: translateX(-15vw);
+        font-size: 15px;
+        border: 0;
+        border-radius: 15px;
+        outline: none;
+        padding-left: 10px;
+        background-color: rgb(233, 233, 233, 20%);
+        text-align: center;
+      }
+    </style>
+  </head>
+
+  <body>
+    <input type="text" id="user-input" placeholder="Enter text here" />
+    <script type="module" src="app.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dat-gui/0.7.9/dat.gui.min.js"></script>
+  </body>
+</html>
