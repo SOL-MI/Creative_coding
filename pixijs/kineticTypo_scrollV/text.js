@@ -66,7 +66,7 @@ export class Text {
       this.ctx.fillText(
         line,
         (stageWidth - fontPos.width) / 2,
-        startY + index * lineHeight + 100
+        startY + index * lineHeight + 70
       );
     });
 

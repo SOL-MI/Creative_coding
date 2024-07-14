@@ -1,5 +1,4 @@
 import { Visual } from "./visual.js";
-import { Wave } from "./wave.js";
 
 class App {
   constructor() {
@@ -21,7 +20,7 @@ class App {
       }
     }
   `;
-    this.backgroundColor = 0x69dcff; // 초기 배경 색상
+    this.backgroundColor = 0x16182a; // 초기 배경 색상
     this.uniformData = {
       // 초기 uniform 데이터 설정
       threshold: 0.5,
@@ -170,19 +169,19 @@ class App {
     const gui = new dat.GUI();
 
     const textOptions = {
-      fontSize: 300,
-      bgColor: "#69dcff",
-      filterColor: "#ff6400",
+      // fontSize: 300,
+      bgColor: "#16182a",
+      filterColor: "#ff6839",
     };
 
-    gui.add(textOptions, "fontSize", 100, 500).onChange((value) => {
-      this.visual.updateTextOptions(
-        { fontSize: value },
-        this.stage,
-        this.stageWidth,
-        this.stageHeight
-      );
-    });
+    // gui.add(textOptions, "fontSize", 100, 500).onChange((value) => {
+    //   this.visual.updateTextOptions(
+    //     { fontSize: value },
+    //     this.stage,
+    //     this.stageWidth,
+    //     this.stageHeight
+    //   );
+    // });
 
     gui.addColor(textOptions, "bgColor").onChange((value) => {
       console.log("value", value);

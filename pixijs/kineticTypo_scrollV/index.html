@@ -36,6 +36,8 @@
     <script>
       const textarea = document.getElementById("user-input");
 
+      textarea.value = "비가 온다\n토독토독";
+
       textarea.addEventListener("input", () => {
         textarea.style.height = "auto";
         textarea.style.height = textarea.scrollHeight + "px";

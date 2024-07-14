@@ -22,6 +22,7 @@ export class Particle {
     this.vy = (Math.random() - 0.5) * 2 * RANDOM_FORCE;
 
     this.radius = 10;
+    this.sprite.filters = [new PIXI.filters.BlurFilter()]; // 블러 필터 추가
   }
 
   draw() {
