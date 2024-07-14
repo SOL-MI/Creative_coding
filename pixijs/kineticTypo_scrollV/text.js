@@ -21,7 +21,8 @@ export class Text {
     this.canvas.height = stageHeight;
 
     const myText = str.split("\n"); // 줄바꿈을 기준으로 텍스트를 분리
-    const { fontWidth, fontSize, fontName, fillStyle } = this.textStyle;
+    const { fontWidth, fontName, fillStyle } = this.textStyle;
+    let fontSize = this.textStyle.fontSize;
 
     // const fontWidth = 700;
     // const fontSize =
@@ -31,6 +32,29 @@ export class Text {
     this.ctx.font = `${fontWidth} ${fontSize}px ${fontName}`;
     this.ctx.fillStyle = fillStyle;
     this.ctx.textBaseline = `middle`;
+
+    // 텍스트가 화면을 넘는지 검사하는 함수
+    const isTextOverflowing = () => {
+      this.ctx.font = `${fontWidth} ${fontSize}px ${fontName}`;
+      const lineHeight = fontSize * 1.2;
+      const totalTextHeight = lineHeight * myText.length;
+      if (totalTextHeight > stageHeight) {
+        return true;
+      }
+
+      for (let line of myText) {
+        const fontPos = this.ctx.measureText(line);
+        if (fontPos.width > stageWidth) {
+          return true;
+        }
+      }
+      return false;
+    };
+
+    // 텍스트가 화면을 넘어갈 때만 글씨 크기를 줄임
+    while (isTextOverflowing()) {
+      fontSize *= 0.9; // 글씨 크기를 줄임
+    }
 
     // 각 줄의 높이와 시작 지점을 계산
     const lineHeight = fontSize * 1.2; // 줄 간격을 설정
