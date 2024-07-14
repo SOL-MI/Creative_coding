@@ -33,7 +33,6 @@ export class Visual {
       tint: false,
     });
     stage.addChild(this.container);
-    console.log(this.container);
 
     this.particles = [];
 
@@ -53,6 +52,12 @@ export class Visual {
         this.particles.push(item);
       }
     }
+  }
+
+  updateTextOptions(options, stage, stageWidth, stageHeight) {
+    this.text.updateStyle(options); // 스타일 업데이트
+    const input = document.getElementById("user-input").value; // 현재 입력값 가져오기
+    this.show(stageWidth, stageHeight, stage, input); // 텍스트 갱신
   }
 
   animate() {

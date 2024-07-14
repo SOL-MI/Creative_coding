@@ -18,7 +18,6 @@
         left: 50%;
         top: 20px;
         width: 30vw;
-        height: 20px;
         transform: translateX(-15vw);
         font-size: 15px;
         border: 0;
@@ -27,12 +26,24 @@
         padding-left: 10px;
         background-color: rgb(233, 233, 233, 20%);
         text-align: center;
+        resize: none;
       }
     </style>
   </head>
 
   <body>
-    <input type="text" id="user-input" placeholder="Enter text here" />
+    <textarea id="user-input" placeholder="Enter text here"></textarea>
+    <script>
+      const textarea = document.getElementById("user-input");
+
+      textarea.addEventListener("input", () => {
+        textarea.style.height = "auto";
+        textarea.style.height = textarea.scrollHeight + "px";
+      });
+
+      // Initialize the height based on initial content
+      textarea.style.height = textarea.scrollHeight + "px";
+    </script>
     <script type="module" src="app.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dat-gui/0.7.9/dat.gui.min.js"></script>
   </body>

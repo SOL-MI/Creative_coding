@@ -1,4 +1,3 @@
-import { Text } from "./text.js";
 import { Visual } from "./visual.js";
 
 class App {
@@ -35,7 +34,7 @@ class App {
     this.stage = new PIXI.Container();
 
     const blurFilter = new PIXI.filters.BlurFilter();
-    blurFilter.blur = 5;
+    blurFilter.blur = 8;
     blurFilter.autoFit = true;
 
     const fragSource = `

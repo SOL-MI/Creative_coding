@@ -47,13 +47,17 @@ export class Visual {
       const item = this.particles[i];
       const dx = this.mouse.x - item.x;
       const dy = this.mouse.y - item.y;
-      const dist = Math.sqrt(dx * dx + dy * dy);
+      const dist = Math.sqrt(dx * dx + dy * dy); // 대각선으로 이동
       const minDist = item.radius + this.mouse.radius;
 
+      // 입자와 마우스의 충돌처리
       if (dist < minDist) {
+        // 마우스와 입자 사이의 각도 (입자 밀어내는 방향 결정)
         const angle = Math.atan2(dy, dx);
+        // 마우스와 입자가 일정 간격을 유지하도록 처리
         const tx = item.x + Math.cos(angle) * minDist;
         const ty = item.y + Math.sin(angle) * minDist;
+        // 마우스가 입자 밀어내는 가속도
         const ax = tx - this.mouse.x;
         const ay = ty - this.mouse.y;
         item.vx -= ax;

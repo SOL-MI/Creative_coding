@@ -7,35 +7,55 @@ export class Text {
     // document.body.appendChild(this.canvas);
 
     this.ctx = this.canvas.getContext("2d");
+
+    this.textStyle = {
+      fontWidth: 700,
+      fontSize: window.innerWidth - 100 > 800 ? 400 : window.innerWidth / 3,
+      fontName: "Hind",
+      fillStyle: "rgba(0, 0, 0, 0.3)",
+    };
   }
 
   setText(str, density, stageWidth, stageHeight) {
     this.canvas.width = stageWidth;
     this.canvas.height = stageHeight;
 
-    const myText = str;
-    const fontWidth = 700;
-    const fontSize =
-      window.innerWidth - 100 > 800 ? 400 : window.innerWidth / 3;
-    const fontName = "Hind";
+    const myText = str.split("\n"); // 줄바꿈을 기준으로 텍스트를 분리
+    const { fontWidth, fontSize, fontName, fillStyle } = this.textStyle;
+
+    // const fontWidth = 700;
+    // const fontSize =
+    //   window.innerWidth - 100 > 800 ? 400 : window.innerWidth / 3;
 
     this.ctx.clearRect(0, 0, stageWidth, stageHeight);
     this.ctx.font = `${fontWidth} ${fontSize}px ${fontName}`;
-    this.ctx.fillStyle = `rgba(0, 0, 0, 0.3)`;
+    this.ctx.fillStyle = fillStyle;
     this.ctx.textBaseline = `middle`;
-    const fontPos = this.ctx.measureText(myText);
-    this.ctx.fillText(
-      myText,
-      (stageWidth - fontPos.width) / 2,
-      fontPos.actualBoundingBoxAscent +
-        fontPos.actualBoundingBoxDescent +
-        (stageHeight - fontSize) / 2
-    );
 
-    return this.dotPos(density, stageWidth, stageHeight);
+    // 각 줄의 높이와 시작 지점을 계산
+    const lineHeight = fontSize * 1.2; // 줄 간격을 설정
+    const totalTextHeight = lineHeight * myText.length;
+    let startY = (stageHeight - totalTextHeight) / 2 + lineHeight / 2;
+
+    myText.forEach((line, index) => {
+      const fontPos = this.ctx.measureText(line);
+      this.ctx.fillText(
+        line,
+        (stageWidth - fontPos.width) / 2,
+        startY + index * lineHeight
+      );
+    });
+
+    return this.dotPos(
+      density,
+      Math.floor(stageWidth),
+      Math.floor(stageHeight)
+    );
   }
 
   dotPos(density, stageWidth, stageHeight) {
+    stageWidth = Math.floor(stageWidth);
+    stageHeight = Math.floor(stageHeight);
     const imageData = this.ctx.getImageData(0, 0, stageWidth, stageHeight).data;
     const particles = [];
     let pixel;
@@ -60,5 +80,19 @@ export class Text {
     }
 
     return particles;
+  }
+
+  updateStyle(styleOptions) {
+    console.log("styleOptions", styleOptions);
+
+    if (styleOptions.fontSize !== undefined) {
+      this.textStyle.fontSize = styleOptions.fontSize;
+    }
+    if (styleOptions.fillStyle !== undefined) {
+      this.textStyle.fillStyle = styleOptions.fillStyle;
+    }
+    if (styleOptions.fontWidth !== undefined) {
+      this.textStyle.fontWidth = styleOptions.fontWidth;
+    }
   }
 }
