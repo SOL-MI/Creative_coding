@@ -40,6 +40,12 @@ class App {
         // this.wave = new Wave(this.renderer, this.stage); // Wave 객체 생성
         // console.log(this.wave);
         window.addEventListener("resize", this.resize.bind(this), false);
+        // window.addEventListener(
+        //   "mousemove",
+        //   this.onMouseMove.bind(this),
+        //   false
+        // ); // 마우스 이동 이벤트 추가
+
         this.resize();
 
         requestAnimationFrame(this.animate.bind(this));
@@ -128,6 +134,11 @@ class App {
     }
   }
 
+  // onMouseMove(event) {
+  //   const mouseX = event.clientX / window.innerWidth;
+  //   const mouseY = event.clientY / window.innerHeight;
+  // }
+
   resize() {
     this.stageWidth = document.body.clientWidth;
     this.stageHeight = window.innerHeight;
@@ -136,6 +147,7 @@ class App {
 
     const input = document.getElementById("user-input");
     if (this.visual) {
+      this.visual.setMouseRadius();
       this.visual.show(
         this.stageWidth,
         this.stageHeight,

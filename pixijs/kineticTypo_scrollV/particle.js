@@ -5,7 +5,7 @@ const RANDOM_FORCE = 5; // 무작위 힘
 export class Particle {
   constructor(pos, texture) {
     this.sprite = new PIXI.Sprite(texture);
-    this.sprite.scale.set(0.2);
+    this.sprite.scale.set(0.3);
     this.sprite.tint = Math.random() * 0x2f2f2f;
 
     this.savedX = pos.x;
@@ -27,11 +27,13 @@ export class Particle {
   draw() {
     // 자기 자리로 돌아가려는 힘 + 무작위 힘
     this.vx +=
-      (this.savedX - this.x) * MOVE_SPEED +
-      (Math.random() - 0.5) * RANDOM_FORCE;
+      ((this.savedX - this.x) * MOVE_SPEED +
+        (Math.random() - 0.5) * RANDOM_FORCE) *
+      0.5;
     this.vy +=
-      (this.savedY - this.y) * MOVE_SPEED +
-      (Math.random() - 0.5) * RANDOM_FORCE;
+      ((this.savedY - this.y) * MOVE_SPEED +
+        (Math.random() - 0.5) * RANDOM_FORCE) *
+      0.5;
 
     this.vx *= FRICTION;
     this.vy *= FRICTION;

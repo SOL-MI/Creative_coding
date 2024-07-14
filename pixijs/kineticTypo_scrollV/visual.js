@@ -12,10 +12,17 @@ export class Visual {
     this.mouse = {
       x: 0,
       y: 0,
-      radius: Math.random() * 100 + 20,
+      radius: 20,
     };
 
     document.addEventListener("pointermove", this.onMove.bind(this), false);
+    this.setMouseRadius();
+  }
+
+  setMouseRadius() {
+    const screenWidth = window.innerWidth;
+    const screenHeight = window.innerHeight;
+    this.mouse.radius = Math.min(screenWidth, screenHeight) * 0.1;
   }
 
   show(stageWidth, stageHeight, stage, inputValue) {
