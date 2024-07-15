@@ -20,7 +20,7 @@ class App {
       }
     }
   `;
-    this.backgroundColor = 0x0747ff; // 초기 배경 색상
+    this.backgroundColor = 0x0715ff; // 초기 배경 색상
     this.uniformData = {
       // 초기 uniform 데이터 설정
       threshold: 0.5,
@@ -170,7 +170,7 @@ class App {
 
     const textOptions = {
       // fontSize: 300,
-      bgColor: "#0747ff",
+      bgColor: "#0715ff",
       filterColor: "#ffffff",
     };
 
