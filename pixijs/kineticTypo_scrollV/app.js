@@ -20,13 +20,13 @@ class App {
       }
     }
   `;
-    this.backgroundColor = 0x16182a; // 초기 배경 색상
+    this.backgroundColor = 0x0747ff; // 초기 배경 색상
     this.uniformData = {
       // 초기 uniform 데이터 설정
       threshold: 0.5,
-      mr: 1.0,
-      mg: 0.39,
-      mb: 0.0,
+      mr: 1,
+      mg: 1,
+      mb: 1,
     };
     this.setWebgl(this.backgroundColor, this.uniformData);
 
@@ -170,8 +170,8 @@ class App {
 
     const textOptions = {
       // fontSize: 300,
-      bgColor: "#16182a",
-      filterColor: "#ff6839",
+      bgColor: "#0747ff",
+      filterColor: "#ffffff",
     };
 
     // gui.add(textOptions, "fontSize", 100, 500).onChange((value) => {
