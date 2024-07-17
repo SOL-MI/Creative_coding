@@ -10,7 +10,7 @@ export class Text {
 
     this.textStyle = {
       fontWidth: 700,
-      fontSize: window.innerWidth - 100 > 800 ? 400 : window.innerWidth / 3,
+      fontSize: window.innerWidth - 100 > 800 ? 330 : window.innerWidth / 3,
       fontName: "Hind",
       fillStyle: "rgba(0, 0, 0, 0.3)",
     };
@@ -107,8 +107,6 @@ export class Text {
   }
 
   updateStyle(styleOptions) {
-    console.log("styleOptions", styleOptions);
-
     if (styleOptions.fontSize !== undefined) {
       this.textStyle.fontSize = styleOptions.fontSize;
     }

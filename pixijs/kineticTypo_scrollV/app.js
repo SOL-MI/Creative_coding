@@ -20,7 +20,7 @@ class App {
       }
     }
   `;
-    this.backgroundColor = 0x0715ff; // 초기 배경 색상
+    this.backgroundColor = 0x223af5; // 초기 배경 색상
     this.uniformData = {
       // 초기 uniform 데이터 설정
       threshold: 0.5,
@@ -165,47 +165,46 @@ class App {
     this.renderer.render(this.stage);
   }
 
-  initGUI() {
-    const gui = new dat.GUI();
+  // initGUI() {
+  //   const gui = new dat.GUI();
 
-    const textOptions = {
-      // fontSize: 300,
-      bgColor: "#0715ff",
-      filterColor: "#ffffff",
-    };
+  //   const textOptions = {
+  //     // fontSize: 300,
+  //     bgColor: "#223af5",
+  //     filterColor: "#ffffff",
+  //   };
 
-    // gui.add(textOptions, "fontSize", 100, 500).onChange((value) => {
-    //   this.visual.updateTextOptions(
-    //     { fontSize: value },
-    //     this.stage,
-    //     this.stageWidth,
-    //     this.stageHeight
-    //   );
-    // });
+  //   // gui.add(textOptions, "fontSize", 100, 500).onChange((value) => {
+  //   //   this.visual.updateTextOptions(
+  //   //     { fontSize: value },
+  //   //     this.stage,
+  //   //     this.stageWidth,
+  //   //     this.stageHeight
+  //   //   );
+  //   // });
 
-    gui.addColor(textOptions, "bgColor").onChange((value) => {
-      console.log("value", value);
-      const hexColor = parseInt(value.replace(/^#/, ""), 16); // 색상을 16진수로 변환
+  //   // gui.addColor(textOptions, "bgColor").onChange((value) => {
+  //   //   const hexColor = parseInt(value.replace(/^#/, ""), 16); // 색상을 16진수로 변환
 
-      this.backgroundColor = hexColor;
-      textOptions.bgColor = value;
+  //   //   this.backgroundColor = hexColor;
+  //   //   textOptions.bgColor = value;
 
-      this.setWebgl(hexColor, this.uniformData);
-      // this.resize();
-    });
+  //   //   this.setWebgl(hexColor, this.uniformData);
+  //   //   // this.resize();
+  //   // });
 
-    gui.addColor(textOptions, "filterColor").onChange((value) => {
-      const color = parseInt(value.replace(/^#/, ""), 16); // 16진수로 변환
-      this.uniformData.mr = ((color >> 16) & 0xff) / 255.0;
-      this.uniformData.mg = ((color >> 8) & 0xff) / 255.0;
-      this.uniformData.mb = (color & 0xff) / 255.0;
-      this.setWebgl(this.backgroundColor, this.uniformData);
-      // this.resize();
+  //   // gui.addColor(textOptions, "filterColor").onChange((value) => {
+  //   //   const color = parseInt(value.replace(/^#/, ""), 16); // 16진수로 변환
+  //   //   this.uniformData.mr = ((color >> 16) & 0xff) / 255.0;
+  //   //   this.uniformData.mg = ((color >> 8) & 0xff) / 255.0;
+  //   //   this.uniformData.mb = (color & 0xff) / 255.0;
+  //   //   this.setWebgl(this.backgroundColor, this.uniformData);
+  //   //   // this.resize();
 
-      textOptions.filterColor = value;
-      console.log(textOptions);
-    });
-  }
+  //   //   textOptions.filterColor = value;
+  //   //   console.log(textOptions);
+  //   // });
+  // }
 }
 
 window.onload = () => {
