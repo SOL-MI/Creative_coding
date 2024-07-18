@@ -29,6 +29,7 @@ export class Visual {
     };
 
     document.addEventListener("pointermove", this.onMove.bind(this), false);
+    // document.addEventListener("touchmove", this.onMove.bind(this), false);
     this.setMouseRadius();
 
     // 주기적으로 원의 위치를 변경
@@ -65,10 +66,10 @@ export class Visual {
     //   this.particles.push(item);
     // }
 
-    const particleCount = Math.floor(this.pos.length * 0.28); // 원하는 비율로 입자 수 조절
+    const particleCount = Math.floor(this.pos.length * 0.23); // 원하는 비율로 입자 수 조절
     for (let i = 0; i < particleCount; i++) {
       const index = Math.floor(Math.random() * this.pos.length);
-      const item = new Particle(this.pos[index], this.texture);
+      const item = new Particle(this.pos[index], this.texture, i);
       if (!this.particles.includes(item)) {
         // 중복 제거
         this.container.addChild(item.sprite);
