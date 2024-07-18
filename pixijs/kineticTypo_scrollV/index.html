@@ -72,8 +72,10 @@
     <script>
       const textarea = document.getElementById("user-input");
       const titleText = document.getElementById("title");
+      const screenWidth = window.innerWidth;
 
-      textarea.value = "비가 온다\n토독토독";
+      textarea.value =
+        innerWidth < 560 ? "비가\n온다\n토독\n토독" : "비가 온다\n토독토독";
 
       textarea.addEventListener("input", () => {
         textarea.style.height = "auto";

@@ -20,7 +20,7 @@ class App {
       }
     }
   `;
-    this.backgroundColor = 0x223af5; // 초기 배경 색상
+    this.backgroundColor = 0x2d3dff; // 초기 배경 색상
     this.uniformData = {
       // 초기 uniform 데이터 설정
       threshold: 0.5,
@@ -81,9 +81,10 @@ class App {
 
       this.stage = new PIXI.Container();
 
-      const blurFilter = new PIXI.filters.BlurFilter();
-      blurFilter.blur = 5;
-      blurFilter.autoFit = true;
+      // 블러 필터 추가
+      this.blurFilter = new PIXI.filters.BlurFilter();
+      this.blurFilter.autoFit = true;
+      this.updateBlurFilter();
 
       //   const fragSource = `
       //   precision mediump float;
@@ -119,10 +120,25 @@ class App {
       );
       // this.thresholdFilter = new PIXI.Filter(null, fragSource, uniformData);
 
-      this.stage.filters = [blurFilter, thresholdFilter];
+      // 텍스트 객체 추가
+      // this.text = new PIXI.Text(
+      //   "2024.\nJuly\nONE RAINY DAY\nIN SUMMER\nINTERACTIVE POSTER\nSERIES\n#1\nBY\nSOLMI KOH",
+      //   {
+      //     fontFamily: "Vogue",
+      //     fontSize: 60,
+      //     fill: "#ffffff",
+      //     align: "center",
+      //   }
+      // );
+      // this.text.x = this.renderer.width / 4;
+      // this.text.y = this.renderer.height / 4;
+      // this.text.anchor.set(0.5);
+      // this.stage.addChild(this.text);
+
+      // 필터 추가
+      this.stage.filters = [this.blurFilter, thresholdFilter];
       this.stage.filterArea = this.renderer.screen;
     } else {
-      console.log("bgColor", bgColor);
       this.renderer.backgroundColor = bgColor; // 기존 렌더러의 배경 색상 업데이트
       const thresholdFilter = new PIXI.Filter(
         null,
@@ -133,10 +149,17 @@ class App {
     }
   }
 
-  // onMouseMove(event) {
-  //   const mouseX = event.clientX / window.innerWidth;
-  //   const mouseY = event.clientY / window.innerHeight;
-  // }
+  updateBlurFilter() {
+    const screenWidth = window.innerWidth;
+
+    // 화면 크기에 따라 블러 필터 단계 조정
+    if (screenWidth < 768) {
+      // 모바일 화면 크기 기준
+      this.blurFilter.blur = 2; // 모바일에서 블러 단계 낮춤
+    } else {
+      this.blurFilter.blur = 5; // 데스크탑에서 블러 단계 높임
+    }
+  }
 
   resize() {
     this.stageWidth = document.body.clientWidth;
@@ -154,6 +177,9 @@ class App {
         input.value
       );
     }
+
+    // 블러 필터 업데이트
+    this.updateBlurFilter();
   }
 
   animate(t) {
@@ -170,7 +196,7 @@ class App {
 
   //   const textOptions = {
   //     // fontSize: 300,
-  //     bgColor: "#223af5",
+  //     bgColor: "#2d3dff",
   //     filterColor: "#ffffff",
   //   };
 
