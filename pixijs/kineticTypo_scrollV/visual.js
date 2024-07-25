@@ -28,8 +28,14 @@ export class Visual {
       radius: Math.min(window.innerWidth, window.innerHeight) * 0.05,
     };
 
-    document.addEventListener("pointermove", this.onMove.bind(this), false);
+    // document.addEventListener("pointermove", this.onMove.bind(this), false);
     // document.addEventListener("touchmove", this.onMove.bind(this), false);
+
+    document.addEventListener("pointermove", this.onMove.bind(this), false);
+    document.addEventListener("touchmove", this.onMove.bind(this), {
+      passive: false,
+    });
+
     this.setMouseRadius();
 
     // 주기적으로 원의 위치를 변경
